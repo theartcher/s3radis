@@ -4,8 +4,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.once('ready', () => {
 	console.log('Ready to work, chief.')
-})	
-;
+})
+	;
 //Bot Status
 client.on('ready', () => {
 	client.user.setActivity('⚙️ Processing incoming requests....')
@@ -13,15 +13,15 @@ client.on('ready', () => {
 //version History
 client.on('message', message => {
 	if (message.content === '/version') {
-	message.channel.send('`Currently Running Seradys Beta V1.1`');
-}
+		message.channel.send('`Currently Running Seradys Beta V1.1`');
+	}
 });
 
 //Prefix Say
 client.on('message', message => {
 	if (message.content === `<@664125197921550356>`) {
-	message.channel.send('My Prefix is `/` Do `/commands` for my commands list and have fun!');
-}
+		message.channel.send('My Prefix is `/` Do `/commands` for my commands list and have fun!');
+	}
 });
 //https://cdn.discordapp.com/attachments/648628577935294470/665942009470779448/tenor.gif
 const errorGif = new Discord.RichEmbed()
@@ -159,7 +159,7 @@ var AngryImages = [
 	"https://cdn.discordapp.com/attachments/648961905192337430/649377198146322452/5Lxu.gif",
 	"https://cdn.discordapp.com/attachments/648961905192337430/649377198146322454/tenor_7.gif",
 	"https://cdn.discordapp.com/attachments/648961905192337430/649377793955856384/giphy_2.gif",
-	"https://cdn.discordapp.com/attachments/648961905192337430/649377793955856385/source_3.gif" 
+	"https://cdn.discordapp.com/attachments/648961905192337430/649377793955856385/source_3.gif"
 ]
 var PunchImages = [
 	"https://cdn.discordapp.com/attachments/648961940055392256/649379354220167168/9eUJ.gif",
@@ -281,203 +281,206 @@ client.on('message', message => {
 	var randomImage;
 	var title;
 	var locationFirstSpace = message.content.indexOf(` `);
-	var contentCommand;
-	if (locationFirstSpace == -1){
-		contentCommand = message.content;
+	var messageCommand;
+
+	if (locationFirstSpace == -1) {
+		messageCommand = message.content;
 	}
 	else {
-		contentCommand = message.content.substring(0,locationFirstSpace);
+		messageCommand = message.content.substring(0, locationFirstSpace);
 	}
-	switch (contentCommand) {
-	// Add case here for new command
+
+	let formattedCommand = messageCommand.toLocaleLowerCase();
+	switch (formattedCommand) {
+		// Add case here for new command
 		case `/hug`: {
-			imageArrayLength = HugImages.length;
-			possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-			randomImage = HugImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(HugImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} hugged themselves...? Weirdo..`
 				);
 			}
-			title = `${message.author.username} hugged ${message.mentions.users.first().username}!`	
+			else {
+				title = `${message.author.username} hugged ${message.mentions.users.first().username}!`
+			}
 			break;
 		}
 		case '/kiss': {
-			imageArrayLength = KissImages.length;
-			possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-			randomImage = KissImages[possibleRandomIndex];
+			randomImage = chooseRandomImage(KissImages);
 			if (message.mentions.users.size <= 0) {
 				return message.reply(errorGif);
 			}
-			title = `${message.author.username} kissed ${message.mentions.users.first().username}, awwww!!`	
+			title = `${message.author.username} kissed ${message.mentions.users.first().username}, awwww!!`
 			break;
 		}
 		case '/slap': {
 			imageArrayLength = SlapImages.length;
-			possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
 			randomImage = SlapImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
 				return message.reply(errorGif);
 			}
-			title = `${message.author.username} slapped ${message.mentions.users.first().username}! Yikes!`	
+			title = `${message.author.username} slapped ${message.mentions.users.first().username}! Yikes!`
 			break;
 		}
 		case '/dance': {
 			imageArrayLength = DanceImages.length;
-			possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
 			randomImage = DanceImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title 
-					= `${message.author.username} is jamming on their own!`
+				(title =
+					`${message.author.username} is jamming on their own!`
 				);
 			}
-			title = `${message.author.username} started dancing with ${message.mentions.users.first().username}!`
+			else {
+				title = `${message.author.username} started dancing with ${message.mentions.users.first().username}!`
+			}
 			break;
 		}
-	
+
 		case '/cry': {
 			imageArrayLength = CryImages.length;
-			possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
 			randomImage = CryImages[possibleRandomIndex];
-			title = `*${message.author.username} started crying!*`;
+			title = (`${message.author.username} started crying!`);
 			break;
 		} case '/angry': {
-            imageArrayLength = AngryImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = AngryImages[possibleRandomIndex];
-            title = `*${message.author.username} is getting angry!!*`;
-            break;
+			imageArrayLength = AngryImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = AngryImages[possibleRandomIndex];
+			title = `*${message.author.username} is getting angry!!*`;
+			break;
 		}
 		case '/punch': {
 			imageArrayLength = PunchImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = PunchImages[possibleRandomIndex];
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = PunchImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title = 
+				(title =
 					`${message.author.username} punched themselves, idiot!`
 				);
 			}
-			title = `${message.author.username} punched ${message.mentions.users.first().username}, that's gotta hurt!`	
+			title = `${message.author.username} punched ${message.mentions.users.first().username}, that's gotta hurt!`
 			break;
 		}
 		case '/shoot': {
-            imageArrayLength = ShootImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = ShootImages[possibleRandomIndex];
+			imageArrayLength = ShootImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = ShootImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title = 
+				(title =
 					`${message.author.username} shot themself, what the fu-`
 				);
 			}
-			title = `${message.mentions.users.first().username} got shot by ${message.author.username}! Holy shit run!`	
+			title = `${message.mentions.users.first().username} got shot by ${message.author.username}! Holy shit run!`
 			break;
 		}
 		case '/blush': {
-            imageArrayLength = BlushImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = BlushImages[possibleRandomIndex];
+			imageArrayLength = BlushImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = BlushImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title = 
+				(title =
 					`${message.author.username} is blushing, aww!`
 				);
 			}
 			else {
 				title = `${message.author.username} is blushing at ${message.mentions.users.first().username}!`;
 			}
-            break; 
+			break;
 		}
 		case '/laugh': {
-            imageArrayLength = LaughImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
+			imageArrayLength = LaughImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
 			randomImage = LaughImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title = 
+				(title =
 					`${message.author.username} started laughing!`
 				);
 			}
 			else {
 				title = `${message.author.username} is laughing at ${message.mentions.users.first().username}!`;
 			}
-            break;
+			break;
 		}
 		case '/poke': {
-            imageArrayLength = PokeImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = PokeImages[possibleRandomIndex];
+			imageArrayLength = PokeImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = PokeImages[possibleRandomIndex];
 			if (message.mentions.users.size <= 0) {
-				(title = 
+				(title =
 					`${message.author.username} poked themself...? Ping a user next time!`
 				);
 			}
-			title = `${message.author.username} poked ${message.mentions.users.first().username}, poke poke!`	
+			title = `${message.author.username} poked ${message.mentions.users.first().username}, poke poke!`
 			break;
 		}
 		case '/bite': {
-            imageArrayLength = BiteImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = BiteImages[possibleRandomIndex];
-            if (message.mentions.users.size <= 0) {
+			imageArrayLength = BiteImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = BiteImages[possibleRandomIndex];
+			if (message.mentions.users.size <= 0) {
 				return message.reply(`${message.author.username} bit his tongue! Ping a user next time :P`);
 			}
-			title = `${message.mentions.users.first().username} got bit by ${message.author.username}!`	
+			title = `${message.mentions.users.first().username} got bit by ${message.author.username}!`
 			break;
 		}
 		case '/insult': {
-            imageArrayLength = InsultImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
-            randomImage = InsultImages[possibleRandomIndex];
-            if (message.mentions.users.size <= 0) {
+			imageArrayLength = InsultImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+			randomImage = InsultImages[possibleRandomIndex];
+			if (message.mentions.users.size <= 0) {
 				return message.reply(errorGif);
 			}
-			title = `${message.author.username} insulted ${message.mentions.users.first().username}!`	
+			title = `${message.author.username} insulted ${message.mentions.users.first().username}!`
 			break;
 		}
 		case '/facepalm': {
-            imageArrayLength = FacepalmImages.length;
-            possibleRandomIndex = Math.round(randomNumber*(imageArrayLength-1));
+			imageArrayLength = FacepalmImages.length;
+			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
 			randomImage = FacepalmImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) { 
-				(title = 
+			if (message.mentions.users.size <= 0) {
+				(title =
 					`${message.author.username} facepalmed, smh!`
 				);
-				}	
-			else{
-            	title = `${message.author.username} facepalmed at ${message.mentions.users.first().username}, smh!`;
+			}
+			else {
+				title = `${message.author.username} facepalmed at ${message.mentions.users.first().username}, smh!`;
 			}
 			break;
-        }
+		}
 		default: {
 			return;
 		}
 	}
-var NewEmbededImage = new Discord.RichEmbed()
+	var NewEmbededImage = new Discord.RichEmbed()
 		.setColor('#47f598')
 		.setTitle(title)
 		.setImage(randomImage);
-message.channel.send(NewEmbededImage);
+	message.channel.send(NewEmbededImage);
 })
 
 //Rolls a dice to a random number
 client.on('message', message => {
 	if (message.content === '/dice') {
-    	var diceRoll = Math.floor(Math.random() * 6) + 1;
-    	if (diceRoll > 3) {
-        	message.channel.send('Looks Like You Rolled... a ' + diceRoll + '!');
-    	} else {
-        	message.channel.send('Wow, nice you rolled ' + diceRoll);
-    	}
+		var diceRoll = Math.floor(Math.random() * 6) + 1;
+		if (diceRoll > 3) {
+			message.channel.send('Looks Like You Rolled... a ' + diceRoll + '!');
+		} else {
+			message.channel.send('Wow, nice you rolled ' + diceRoll);
+		}
 	}
 });
 //Pings bot to see if it responds correctly
 client.on('message', message => {
 	if (message.content === '/ping') {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
-    	if (diceRoll > 3) {
-        	message.channel.send('Ping pong, we done.');
-    	} else {
-        	message.channel.send('Ping pong, king kong. ');
-    	}
-}
+		if (diceRoll > 3) {
+			message.channel.send('Ping pong, we done.');
+		} else {
+			message.channel.send('Ping pong, king kong. ');
+		}
+	}
 
 });
 //Shows Commands List + embed
@@ -486,9 +489,9 @@ const gcmdlistEmbed = new Discord.RichEmbed()
 	.setTitle('Commands List')
 	.setDescription('Page 1 of 1')
 	.addField("/commands", "Shows command lists", true)
-	.addField("/commands fun", "Shows fun commands", true)
+	.addField("/commands fun", "(CURRENTLY DISABLED)", true)
 	.addField("/ping", "Ping to see if the bot is online", true)
-	.addField("/gifs", "Shows all useable gifs",true)
+	.addField("/gifs", "Shows all useable gifs", true)
 	.addField("/version", "Display current version", true)
 	.addField("/who (PING)", "Displays user info", true)
 	.addField("/id", "Displays user id", true)
@@ -499,37 +502,37 @@ const fcmdlistEmbed = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Your fine selection of gifs')
 	.setDescription('Page 1 of 1')
-	.addField("Hug","Hug someone", true)
-	.addField("Insult","Insult someone", true)
-	.addField("Kiss","Kiss someone", true)
-	.addField("Punch","Punch someone", true)
-	.addField("Slap","Slap someone", true)
-	.addField("Shoot","Shoot someone", true)
-	.addField("Cry","Cry by yourself",true)
-	.addField("Angry","Get angry at someone", true)
-	.addField("Laugh","Laugh at someone", true)
-	.addField("Blush","Blush at someone", true)
+	.addField("Hug", "Hug someone", true)
+	.addField("Insult", "Insult someone", true)
+	.addField("Kiss", "Kiss someone", true)
+	.addField("Punch", "Punch someone", true)
+	.addField("Slap", "Slap someone", true)
+	.addField("Shoot", "Shoot someone", true)
+	.addField("Cry", "Cry by yourself", true)
+	.addField("Angry", "Get angry at someone", true)
+	.addField("Laugh", "Laugh at someone", true)
+	.addField("Blush", "Blush at someone", true)
 	.addField("Poke", "Poke someone", true)
-	.addField("Dance","Dance with someone", true)
-	.addField("Bite","Bite them, nom nom", true)
+	.addField("Dance", "Dance with someone", true)
+	.addField("Bite", "Bite them, nom nom", true)
 	.setTimestamp()
 	.setFooter("Seradys Beta V1.1", "https://i.imgur.com/VCp7qHi.png")
 client.on('message', message => {
-	if (message.content === '/commands') {
-	message.channel.send(gcmdlistEmbed);
+	if (message.content === '/commands' || message.content === "/help") {
+		message.channel.send(gcmdlistEmbed);
 	}
 	if (message.content === '/gifs') {
 		message.channel.send(fcmdlistEmbed);
-		}
+	}
 });
 
 //Gun Information
 
 client.on('message', message => {
 	if (message.content === '/gun-info') {
-	message.channel.send('https://docs.google.com/document/d/1X6ldpnY97VVuh4LgnM-_mmb00f4U8ryho4tPsHgce4g/edit?usp=sharing');
- }
-	
+		message.channel.send('https://docs.google.com/document/d/1X6ldpnY97VVuh4LgnM-_mmb00f4U8ryho4tPsHgce4g/edit?usp=sharing');
+	}
+
 });
 //Fun Commands
 
@@ -541,24 +544,25 @@ const Seradysinfo = new Discord.RichEmbed()
 	.addField('What are you?', 'Im a personal server bot, do /commands for more info!')
 	.addField("Who's your creator?", 'My main coder is The Artcher#9289, Custom Sniper45#8596 provided the main concept, and coded aswell.')
 	.addBlankField()
-    .setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
-    .addField('Small note', 'This is a 1 person project, bugs are to be expected.')
+	.setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
+	.addField('Small note', 'This is a 1 person project, bugs are to be expected.')
 	.setImage('https://i.imgur.com/VCp7qHi.png');
 client.on('message', message => {
-    if (message.content === '/bot info') {
-    message.channel.send(Seradysinfo);
+	if (message.content === '/bot info') {
+		message.channel.send(Seradysinfo);
 	}
 })
 //ID ping
 client.on('message', message => {
-	if (message.content.startsWith("/id")) {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("/id")) {
 		if (!message.mentions.members.first(
-			
-		))
-		return message.channel.send(errorGif);
-{
 
-	return message.channel.send(`> Your requested ID: *${message.mentions.users.first().id}*`);
+		))
+			return message.channel.send(errorGif);
+		{
+
+			return message.channel.send(`> Your requested ID: *${message.mentions.users.first().id}*`);
 		}
 	}
 
@@ -580,32 +584,64 @@ client.on('message', message => {
 client.on('message', message => {
 	if (message.content.startsWith('/who')) {
 		if (!message.mentions.members.first(
-		
-			))
+
+		))
 			return message.channel.send(errorGif);
-		
+
 		var userID = message.mentions.users.first().id
 		var userTag = message.mentions.users.first().tag
 		var userCreationDate = (message.mentions.users.first().createdAt)
 		const idEmbed = new Discord.RichEmbed()
 			.setColor('#47f598')
-			.setTitle(`User '` + userTag +`'`)
+			.setTitle(`User '` + userTag + `'`)
 			.addField(`Their ID`, userID)
 			.addField(`Account creation date`, userCreationDate)
 			.setTimestamp(message.createdAt)
 			.addBlankField()
 			.setImage(`${message.mentions.users.first().displayAvatarURL}`)
 			.setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
-	message.channel.send(idEmbed);
+		message.channel.send(idEmbed);
 	}
 })
 
-//top prio : fix github
+//
+//======= TESTING BELOW =======//
+//
 
+//top prio : fix github = fixed
 //work on personality
-//Fix embeds for regular images
+//Fix embeds for regular messages = delayed till later, not neccesary yet
 //fix scaling = fixed
 //check code for simple fixes = fixed (error quotes on images " paired with ')
 //gif without pings = fixed
+
+//Positive vibes
+client.on('message', message => {
+	if (message.content === 'Seradys, fuck you') (
+		message.channel.send("No, fuck you. Cunt")
+	)
+	if (message.content === 'Seradys sucks') (
+		message.channel.send("Get out you dense cabbage")
+	)
+	if (message.content === 'Seradys fite me') (
+		message.channel.send("Get out you dense cabbage")
+	)
+})
+
+function chooseRandomImage(imageArray) {
+	let imageArrayLength = imageArray.length;
+	let randomNumber = Math.random();
+	let possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+	return imageArray[possibleRandomIndex];
+}
+
+function checkIfUserHasBeenMentioned(message) {
+	return message.mentions.users.size <= 0;
+}
+
+function preFormatCommand(message) {
+	return message.content.toLowerCase();
+}
+
 
 client.login(discordSecret);

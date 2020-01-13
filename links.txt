@@ -1,0 +1,52 @@
+https://discordjs.guide/creating-your-bot/#listening-for-messages
+https://discord.js.org/#/docs/main/master/class/GuildMember?scrollTo=permissions
+https://docs.google.com/document/d/1FubBeWPKOrscpqc48fI52dqvSA_y1TcYN_dnTbz2x9g/edit
+https://discordapp.com/oauth2/authorize?client_id=6394072433931059208&scope=bot
+cd C:\Users\joris\Desktop\JTB
+node .
+
+https://cdn.discordapp.com/attachments/6
+31508107536629763/638836599802560523/b924693590941034be5ae5795837fb36.gif
+
+	//
+	var random = [
+		"https://cdn.discordapp.com/attachments/631508107536629763/638836599802560523/b924693590941034be5ae5795837fb36.gif",
+		"https://cdn.discordapp.com/attachments/637647486902861824/639576907440062465/tenor.gif"
+	  ];
+		 var rand = random[Math.floor(Math.random() * random.length)]
+		const testEmbed = new Discord.RichEmbed()
+		.setColor('#031134')
+		.setTitle('testing')
+		.setImage(rand);
+		client.on('message', message => {
+		if (message.content === '%test3')
+		message.channel.send(testEmbed);
+	  })
+
+
+	  var messages = ["Good!", "Great!", "Awesome!", "Super!", "Nice!"];
+	  var variablename = messages[Math.floor(Math.random() * messages.length)];
+	  if (message.content === 'yourinput')
+		message.channel.send(variablename);
+	  //
+	  //
+
+
+	
+
+
+
+client.on('message', message => {
+	if (message.content === 't3'){
+		var randomNr = Math.random()
+		var length = testImages.length
+		var index = Math.round(randomNr*(length-1))
+		console.log('length', length, 'randomNr=', randomNr, 'index=', index)
+		var rand = testImages[index]
+		var testEmbed = new Discord.RichEmbed()
+			.setColor('#031134')
+			.setTitle('testing', index)
+			.setImage(rand);
+		message.channel.send(testEmbed);
+	}
+ })
