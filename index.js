@@ -17,6 +17,7 @@ client.on('message', message => {
 	}
 });
 
+
 //Prefix Say
 client.on('message', message => {
 	if (message.content === `<@664125197921550356>`) {
@@ -275,9 +276,6 @@ var FacepalmImages = [
 ]
 //GIF responses
 client.on('message', message => {
-	var randomNumber = Math.random();
-	var imageArrayLength;
-	var possibleRandomIndex;
 	var randomImage;
 	var title;
 	var locationFirstSpace = message.content.indexOf(` `);
@@ -307,27 +305,23 @@ client.on('message', message => {
 		}
 		case '/kiss': {
 			randomImage = chooseRandomImage(KissImages);
-			if (message.mentions.users.size <= 0) {
+			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
 			}
 			title = `${message.author.username} kissed ${message.mentions.users.first().username}, awwww!!`
 			break;
 		}
 		case '/slap': {
-			imageArrayLength = SlapImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = SlapImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(SlapImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
 			}
 			title = `${message.author.username} slapped ${message.mentions.users.first().username}! Yikes!`
 			break;
 		}
 		case '/dance': {
-			imageArrayLength = DanceImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = DanceImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(DanceImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} is jamming on their own!`
 				);
@@ -339,23 +333,17 @@ client.on('message', message => {
 		}
 
 		case '/cry': {
-			imageArrayLength = CryImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = CryImages[possibleRandomIndex];
+			randomImage = chooseRandomImage(CryImages);
 			title = (`${message.author.username} started crying!`);
 			break;
 		} case '/angry': {
-			imageArrayLength = AngryImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = AngryImages[possibleRandomIndex];
+			randomImage = chooseRandomImage(AngryImages);
 			title = `*${message.author.username} is getting angry!!*`;
 			break;
 		}
 		case '/punch': {
-			imageArrayLength = PunchImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = PunchImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(PunchImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} punched themselves, idiot!`
 				);
@@ -364,10 +352,8 @@ client.on('message', message => {
 			break;
 		}
 		case '/shoot': {
-			imageArrayLength = ShootImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = ShootImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(ShootImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} shot themself, what the fu-`
 				);
@@ -376,10 +362,8 @@ client.on('message', message => {
 			break;
 		}
 		case '/blush': {
-			imageArrayLength = BlushImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = BlushImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(BlushImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} is blushing, aww!`
 				);
@@ -390,10 +374,8 @@ client.on('message', message => {
 			break;
 		}
 		case '/laugh': {
-			imageArrayLength = LaughImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = LaughImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(LaughImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} started laughing!`
 				);
@@ -404,10 +386,8 @@ client.on('message', message => {
 			break;
 		}
 		case '/poke': {
-			imageArrayLength = PokeImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = PokeImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(PokeImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} poked themself...? Ping a user next time!`
 				);
@@ -416,30 +396,24 @@ client.on('message', message => {
 			break;
 		}
 		case '/bite': {
-			imageArrayLength = BiteImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = BiteImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(BiteImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(`${message.author.username} bit his tongue! Ping a user next time :P`);
 			}
 			title = `${message.mentions.users.first().username} got bit by ${message.author.username}!`
 			break;
 		}
 		case '/insult': {
-			imageArrayLength = InsultImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = InsultImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(InsultImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
 			}
 			title = `${message.author.username} insulted ${message.mentions.users.first().username}!`
 			break;
 		}
 		case '/facepalm': {
-			imageArrayLength = FacepalmImages.length;
-			possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-			randomImage = FacepalmImages[possibleRandomIndex];
-			if (message.mentions.users.size <= 0) {
+			randomImage = chooseRandomImage(FacepalmImages);
+			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
 					`${message.author.username} facepalmed, smh!`
 				);
@@ -604,6 +578,22 @@ client.on('message', message => {
 	}
 })
 
+
+function chooseRandomImage(imageArray) {
+	let imageArrayLength = imageArray.length;
+	let randomNumber = Math.random();
+	let possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
+	return imageArray[possibleRandomIndex];
+}
+
+function checkIfUserHasBeenMentioned(message) {
+	return message.mentions.users.size <= 0;
+}
+
+function preFormatCommand(message) {
+	return message.content.toLowerCase();
+}
+
 //
 //======= TESTING BELOW =======//
 //
@@ -627,21 +617,6 @@ client.on('message', message => {
 		message.channel.send("Get out you dense cabbage")
 	)
 })
-
-function chooseRandomImage(imageArray) {
-	let imageArrayLength = imageArray.length;
-	let randomNumber = Math.random();
-	let possibleRandomIndex = Math.round(randomNumber * (imageArrayLength - 1));
-	return imageArray[possibleRandomIndex];
-}
-
-function checkIfUserHasBeenMentioned(message) {
-	return message.mentions.users.size <= 0;
-}
-
-function preFormatCommand(message) {
-	return message.content.toLowerCase();
-}
 
 
 client.login(discordSecret);
