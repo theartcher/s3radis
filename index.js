@@ -12,7 +12,7 @@ client.on('ready', () => {
 })
 //version History
 client.on('message', message => {
-	if (message.content === '/version') {
+	if (message.content === 's!version') {
 		message.channel.send('`Currently Running Seradys Beta V1.1`');
 	}
 });
@@ -21,14 +21,14 @@ client.on('message', message => {
 //Prefix Say
 client.on('message', message => {
 	if (message.content === `<@664125197921550356>`) {
-		message.channel.send('My Prefix is `/` Do `/commands` for my commands list and have fun!');
+		message.channel.send('My Prefix is `s!` Do `s!commands` for my commands list and have fun!');
 	}
 });
 //https://cdn.discordapp.com/attachments/648628577935294470/665942009470779448/tenor.gif
 const errorGif = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Seradys.js has stopped working..')
-	.setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
+	.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.setAuthor('Uhmm... What..?')
 	.setTimestamp()
 	.setDescription(`Ping someone, I can't do everything!`)
@@ -39,7 +39,6 @@ const errorGif = new Discord.RichEmbed()
 require('events').EventEmitter.defaultMaxListeners = 25
 
 //All gif variables!
-
 var KissImages = [
 	"https://cdn.discordapp.com/attachments/631508107536629763/638842376869117962/tenor.gif",
 	"https://cdn.discordapp.com/attachments/631508107536629763/638842376382709770/original_50392.gif",
@@ -291,7 +290,7 @@ client.on('message', message => {
 	let formattedCommand = messageCommand.toLocaleLowerCase();
 	switch (formattedCommand) {
 		// Add case here for new command
-		case `/hug`: {
+		case `s!hug`: {
 			randomImage = chooseRandomImage(HugImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -303,7 +302,7 @@ client.on('message', message => {
 			}
 			break;
 		}
-		case '/kiss': {
+		case 's!kiss': {
 			randomImage = chooseRandomImage(KissImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
@@ -311,7 +310,7 @@ client.on('message', message => {
 			title = `${message.author.username} kissed ${message.mentions.users.first().username}, awwww!!`
 			break;
 		}
-		case '/slap': {
+		case 's!slap': {
 			randomImage = chooseRandomImage(SlapImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
@@ -319,7 +318,7 @@ client.on('message', message => {
 			title = `${message.author.username} slapped ${message.mentions.users.first().username}! Yikes!`
 			break;
 		}
-		case '/dance': {
+		case 's!dance': {
 			randomImage = chooseRandomImage(DanceImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -332,16 +331,16 @@ client.on('message', message => {
 			break;
 		}
 
-		case '/cry': {
+		case 's!cry': {
 			randomImage = chooseRandomImage(CryImages);
 			title = (`${message.author.username} started crying!`);
 			break;
-		} case '/angry': {
+		} case 's!angry': {
 			randomImage = chooseRandomImage(AngryImages);
 			title = `*${message.author.username} is getting angry!!*`;
 			break;
 		}
-		case '/punch': {
+		case 's!punch': {
 			randomImage = chooseRandomImage(PunchImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -351,7 +350,7 @@ client.on('message', message => {
 			title = `${message.author.username} punched ${message.mentions.users.first().username}, that's gotta hurt!`
 			break;
 		}
-		case '/shoot': {
+		case 's!shoot': {
 			randomImage = chooseRandomImage(ShootImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -361,7 +360,7 @@ client.on('message', message => {
 			title = `${message.mentions.users.first().username} got shot by ${message.author.username}! Holy shit run!`
 			break;
 		}
-		case '/blush': {
+		case 's!blush': {
 			randomImage = chooseRandomImage(BlushImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -373,7 +372,7 @@ client.on('message', message => {
 			}
 			break;
 		}
-		case '/laugh': {
+		case 's!laugh': {
 			randomImage = chooseRandomImage(LaughImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -385,7 +384,7 @@ client.on('message', message => {
 			}
 			break;
 		}
-		case '/poke': {
+		case 's!poke': {
 			randomImage = chooseRandomImage(PokeImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -395,7 +394,7 @@ client.on('message', message => {
 			title = `${message.author.username} poked ${message.mentions.users.first().username}, poke poke!`
 			break;
 		}
-		case '/bite': {
+		case 's!bite': {
 			randomImage = chooseRandomImage(BiteImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(`${message.author.username} bit his tongue! Ping a user next time :P`);
@@ -403,7 +402,7 @@ client.on('message', message => {
 			title = `${message.mentions.users.first().username} got bit by ${message.author.username}!`
 			break;
 		}
-		case '/insult': {
+		case 's!insult': {
 			randomImage = chooseRandomImage(InsultImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				return message.reply(errorGif);
@@ -411,7 +410,7 @@ client.on('message', message => {
 			title = `${message.author.username} insulted ${message.mentions.users.first().username}!`
 			break;
 		}
-		case '/facepalm': {
+		case 's!facepalm': {
 			randomImage = chooseRandomImage(FacepalmImages);
 			if (checkIfUserHasBeenMentioned(message)) {
 				(title =
@@ -436,7 +435,7 @@ client.on('message', message => {
 
 //Rolls a dice to a random number
 client.on('message', message => {
-	if (message.content === '/dice') {
+	if (message.content === 's!dice') {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
 		if (diceRoll > 3) {
 			message.channel.send('Looks Like You Rolled... a ' + diceRoll + '!');
@@ -447,7 +446,7 @@ client.on('message', message => {
 });
 //Pings bot to see if it responds correctly
 client.on('message', message => {
-	if (message.content === '/ping') {
+	if (message.content === 's!ping') {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
 		if (diceRoll > 3) {
 			message.channel.send('Ping pong, we done.');
@@ -462,15 +461,15 @@ const gcmdlistEmbed = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Commands List')
 	.setDescription('Page 1 of 1')
-	.addField("/commands", "Shows command lists", true)
-	.addField("/commands fun", "(CURRENTLY DISABLED)", true)
-	.addField("/ping", "Ping to see if the bot is online", true)
-	.addField("/gifs", "Shows all useable gifs", true)
-	.addField("/version", "Display current version", true)
-	.addField("/who (PING)", "Displays user info", true)
-	.addField("/id", "Displays user id", true)
+	.addField("s!commands", "Shows command lists", true)
+	.addField("s!commands fun", "(CURRENTLY DISABLED)", true)
+	.addField("s!ping", "Ping to see if the bot is online", true)
+	.addField("s!gifs", "Shows all useable gifs", true)
+	.addField("s!version", "Display current version", true)
+	.addField("s!who (PING)", "Displays user info", true)
+	.addField("s!id", "Displays user id", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.1", 'https://i.imgur.com/VCp7qHi.png')
+	.setFooter("Seradys Beta V1.1", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 //GIFs list
 const fcmdlistEmbed = new Discord.RichEmbed()
 	.setColor('#47f598')
@@ -490,12 +489,12 @@ const fcmdlistEmbed = new Discord.RichEmbed()
 	.addField("Dance", "Dance with someone", true)
 	.addField("Bite", "Bite them, nom nom", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.1", "https://i.imgur.com/VCp7qHi.png")
+	.setFooter("Seradys Beta V1.1", "https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png")
 client.on('message', message => {
-	if (message.content === '/commands' || message.content === "/help") {
+	if (message.content === 's!commands' || message.content === "s!help") {
 		message.channel.send(gcmdlistEmbed);
 	}
-	if (message.content === '/gifs') {
+	if (message.content === 's!gifs') {
 		message.channel.send(fcmdlistEmbed);
 	}
 });
@@ -516,20 +515,20 @@ const Seradysinfo = new Discord.RichEmbed()
 	.setTitle('Seradys Information')
 	.setDescription('About me')
 	.addField('What are you?', 'Im a personal server bot, do /commands for more info!')
-	.addField("Who's your creator?", 'My main coder is The Artcher#9289, Custom Sniper45#8596 provided the main concept, and coded aswell.')
+	.addField("Who's your creator?", 'My coder is The Artcher#9289, he makes me work for you guys!')
 	.addBlankField()
-	.setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
+	.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.addField('Small note', 'This is a 1 person project, bugs are to be expected.')
-	.setImage('https://i.imgur.com/VCp7qHi.png');
+	.setImage('https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png');
 client.on('message', message => {
-	if (message.content === '/bot info') {
+	if (message.content === 's!bot info') {
 		message.channel.send(Seradysinfo);
 	}
 })
 //ID ping
 client.on('message', message => {
 	let formattedCommand = preFormatCommand(message);
-	if (formattedCommand.startsWith("/id")) {
+	if (formattedCommand.startsWith("s!id")) {
 		if (!message.mentions.members.first(
 
 		))
@@ -556,7 +555,7 @@ client.on('message', message => {
 //}, 2000)
 
 client.on('message', message => {
-	if (message.content.startsWith('/who')) {
+	if (message.content.startsWith('s!who')) {
 		if (!message.mentions.members.first(
 
 		))
@@ -573,7 +572,7 @@ client.on('message', message => {
 			.setTimestamp(message.createdAt)
 			.addBlankField()
 			.setImage(`${message.mentions.users.first().displayAvatarURL}`)
-			.setFooter('Seradys Beta V1.1', 'https://i.imgur.com/VCp7qHi.png')
+			.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 		message.channel.send(idEmbed);
 	}
 })
@@ -604,6 +603,8 @@ function preFormatCommand(message) {
 //fix scaling = fixed
 //check code for simple fixes = fixed (error quotes on images " paired with ')
 //gif without pings = fixed
+
+
 
 //Positive vibes
 client.on('message', message => {
