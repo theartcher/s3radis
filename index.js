@@ -6,14 +6,19 @@ client.once('ready', () => {
 	console.log('Ready to work, chief.')
 })
 	;
+
+
 //Bot Status
 client.on('ready', () => {
 	client.user.setActivity('⚙️ Processing incoming requests....')
 })
+
+
 //version History
 client.on('message', message => {
-	if (message.content === 's!version') {
-		message.channel.send('`Currently Running Seradys Beta V1.1`');
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("s!version")) {
+		message.channel.send(`<@` + `${message.author.id}` + `>` + '`Currently Running Seradys Beta V1.3`');
 	}
 });
 
@@ -24,11 +29,12 @@ client.on('message', message => {
 		message.channel.send('My Prefix is `s!` Do `s!commands` for my commands list and have fun!');
 	}
 });
-//https://cdn.discordapp.com/attachments/648628577935294470/665942009470779448/tenor.gif
+
+
 const errorGif = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Seradys.js has stopped working..')
-	.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter('Seradys Beta V1.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.setAuthor('Uhmm... What..?')
 	.setTimestamp()
 	.setDescription(`Ping someone, I can't do everything!`)
@@ -37,6 +43,10 @@ const errorGif = new Discord.RichEmbed()
 
 //Eventlistener error fix 
 require('events').EventEmitter.defaultMaxListeners = 25
+
+
+
+
 
 //All gif variables!
 var KissImages = [
@@ -433,9 +443,11 @@ client.on('message', message => {
 	message.channel.send(NewEmbededImage);
 })
 
+
 //Rolls a dice to a random number
 client.on('message', message => {
-	if (message.content === 's!dice') {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("s!dice")) {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
 		if (diceRoll > 3) {
 			message.channel.send('Looks Like You Rolled... a ' + diceRoll + '!');
@@ -444,9 +456,12 @@ client.on('message', message => {
 		}
 	}
 });
+
+
 //Pings bot to see if it responds correctly
 client.on('message', message => {
-	if (message.content === 's!ping') {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("s!ping")) {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
 		if (diceRoll > 3) {
 			message.channel.send('Ping pong, we done.');
@@ -456,7 +471,9 @@ client.on('message', message => {
 	}
 
 });
-//Shows Commands List + embed
+
+
+//Shows Commands List Embed + command
 const gcmdlistEmbed = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Commands List')
@@ -469,9 +486,17 @@ const gcmdlistEmbed = new Discord.RichEmbed()
 	.addField("s!who (PING)", "Displays user info", true)
 	.addField("s!id", "Displays user id", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.1", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
-//GIFs list
-const fcmdlistEmbed = new Discord.RichEmbed()
+	.setFooter("Seradys Beta V1.3", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+client.on('message', message => {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand === 's!commands' || formattedCommand === "s!help") {
+		message.channel.send(gcmdlistEmbed);
+	}
+});
+
+
+//GIFs list Embed + command for gifs
+const gifcmdlistEmbed = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Your fine selection of gifs')
 	.setDescription('Page 1 of 1')
@@ -489,25 +514,24 @@ const fcmdlistEmbed = new Discord.RichEmbed()
 	.addField("Dance", "Dance with someone", true)
 	.addField("Bite", "Bite them, nom nom", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.1", "https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png")
+	.setFooter("Seradys Beta V1.3", "https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png")
 client.on('message', message => {
-	if (message.content === 's!commands' || message.content === "s!help") {
-		message.channel.send(gcmdlistEmbed);
-	}
-	if (message.content === 's!gifs') {
-		message.channel.send(fcmdlistEmbed);
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand === 's!gifs') {
+		message.channel.send(gifcmdlistEmbed);
 	}
 });
 
-//Gun Information
 
+//Gun Information
 client.on('message', message => {
-	if (message.content === '/gun-info') {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("s!gun info")) {
 		message.channel.send('https://docs.google.com/document/d/1X6ldpnY97VVuh4LgnM-_mmb00f4U8ryho4tPsHgce4g/edit?usp=sharing');
 	}
 
 });
-//Fun Commands
+
 
 //Seradys Embed
 const Seradysinfo = new Discord.RichEmbed()
@@ -517,11 +541,12 @@ const Seradysinfo = new Discord.RichEmbed()
 	.addField('What are you?', 'Im a personal server bot, do /commands for more info!')
 	.addField("Who's your creator?", 'My coder is The Artcher#9289, he makes me work for you guys!')
 	.addBlankField()
-	.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter('Seradys Beta V1.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.addField('Small note', 'This is a 1 person project, bugs are to be expected.')
 	.setImage('https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png');
 client.on('message', message => {
-	if (message.content === 's!bot info') {
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand.startsWith("s!bot info")) {
 		message.channel.send(Seradysinfo);
 	}
 })
@@ -572,12 +597,13 @@ client.on('message', message => {
 			.setTimestamp(message.createdAt)
 			.addBlankField()
 			.setImage(`${message.mentions.users.first().displayAvatarURL}`)
-			.setFooter('Seradys Beta V1.1', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+			.setFooter('Seradys Beta V1.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 		message.channel.send(idEmbed);
 	}
 })
 
 
+//Function for gifs
 function chooseRandomImage(imageArray) {
 	let imageArrayLength = imageArray.length;
 	let randomNumber = Math.random();
@@ -585,39 +611,47 @@ function chooseRandomImage(imageArray) {
 	return imageArray[possibleRandomIndex];
 }
 
+
+//Mention function
 function checkIfUserHasBeenMentioned(message) {
 	return message.mentions.users.size <= 0;
 }
 
+
+//Allow all cases on input
 function preFormatCommand(message) {
 	return message.content.toLowerCase();
 }
+
+
 
 //
 //======= TESTING BELOW =======//
 //
 
 //top prio : fix github = fixed
-//work on personality
+//work on personality   prio = low
 //Fix embeds for regular messages = delayed till later, not neccesary yet
 //fix scaling = fixed
 //check code for simple fixes = fixed (error quotes on images " paired with ')
 //gif without pings = fixed
-
-
-
-//Positive vibes
+const fcmdlistembed = new Discord.RichEmbed()
+	.setColor('#47f598')
+	.setTitle('Fun Commands List')
+	.setDescription('Page 1 of 1 (TESTING ALL FEATURES)')
+	.addField("s!insult", "Insults you", true)
+	.addField("s!8ball", "Answer your inquiries", true)
+	.addField("s!rr (PING)", "Play russion roulette", true)
+	.addField("s!gifs", "Shows all useable gifs", true)
+	.setTimestamp()
+	.setFooter("Seradys Beta V1.3", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 client.on('message', message => {
-	if (message.content === 'Seradys, fuck you') (
-		message.channel.send("No, fuck you. Cunt")
-	)
-	if (message.content === 'Seradys sucks') (
-		message.channel.send("Get out you dense cabbage")
-	)
-	if (message.content === 'Seradys fite me') (
-		message.channel.send("Get out you dense cabbage")
-	)
-})
+	let formattedCommand = preFormatCommand(message);
+	if (formattedCommand === 's!commands fun') {
+		message.channel.send(fcmdlistembed);
+	}
+});
+
 
 
 client.login(discordSecret);
