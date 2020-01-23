@@ -18,7 +18,7 @@ client.on('ready', () => {
 client.on('message', message => {
 	let formattedCommand = preFormatCommand(message);
 	if (formattedCommand.startsWith("s!version")) {
-		message.channel.send(`<@` + `${message.author.id}` + `>` + '`Currently Running Seradys Beta V1.3.3`');
+		message.channel.send(`<@` + `${message.author.id}` + `>` + '`Currently Running Seradys Beta V1.3.5`');
 	}
 });
 
@@ -34,7 +34,7 @@ client.on('message', message => {
 const errorGif = new Discord.RichEmbed()
 	.setColor('#47f598')
 	.setTitle('Seradys.js has stopped working..')
-	.setFooter('Seradys Beta V1.3.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter('Seradys Beta V1.3.5', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.setAuthor('Uhmm... What..?')
 	.setTimestamp()
 	.setDescription(`Ping someone, I can't do everything!`)
@@ -467,7 +467,7 @@ client.on('message', message => {
 	if (formattedCommand.startsWith("s!dice")) {
 		var diceRoll = Math.floor(Math.random() * 6) + 1;
 		if (diceRoll > 3) {
-			message.channel.send('Looks Like You Rolled... a ' + diceRoll + '!');
+			message.channel.send('Looks like you rolled... a ' + diceRoll + '!');
 		} else {
 			message.channel.send('Wow, nice you rolled ' + diceRoll);
 		}
@@ -503,7 +503,7 @@ const gcmdlistEmbed = new Discord.RichEmbed()
 	.addField("s!who (PING)", "Displays user info", true)
 	.addField("s!id", "Displays user id", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.3.3", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter("Seradys Beta V1.3.5", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 client.on('message', message => {
 	let formattedCommand = preFormatCommand(message);
 	if (formattedCommand === 's!commands' || formattedCommand === "s!help") {
@@ -531,7 +531,7 @@ const gifcmdlistEmbed = new Discord.RichEmbed()
 	.addField("Dance", "Dance with someone", true)
 	.addField("Bite", "Bite them, nom nom", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.3.3", "https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png")
+	.setFooter("Seradys Beta V1.3.5", "https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png")
 client.on('message', message => {
 	let formattedCommand = preFormatCommand(message);
 	if (formattedCommand === 's!gifs') {
@@ -558,7 +558,7 @@ const Seradysinfo = new Discord.RichEmbed()
 	.addField('What are you?', 'Im a personal server bot, do /commands for more info!')
 	.addField("Who's your creator?", 'My coder is The Artcher#9289, he makes me work for you guys!')
 	.addBlankField()
-	.setFooter('Seradys Beta V1.3.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter('Seradys Beta V1.3.5', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 	.addField('Small note', 'This is a 1 person project, bugs are to be expected.')
 	.setImage('https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png');
 client.on('message', message => {
@@ -614,7 +614,7 @@ client.on('message', message => {
 			.setTimestamp(message.createdAt)
 			.addBlankField()
 			.setImage(`${message.mentions.users.first().displayAvatarURL}`)
-			.setFooter('Seradys Beta V1.3.3', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+			.setFooter('Seradys Beta V1.3.5', 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 		message.channel.send(idEmbed);
 	}
 })
@@ -649,7 +649,7 @@ const fcmdlistembed = new Discord.RichEmbed()
 	.addField("s!rr (PING)", "Play russion roulette", true)
 	.addField("s!gifs", "Shows all useable gifs", true)
 	.setTimestamp()
-	.setFooter("Seradys Beta V1.3.3", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+	.setFooter("Seradys Beta V1.3.5", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 client.on('message', message => {
 	let formattedCommand = preFormatCommand(message);
 	if (formattedCommand === 's!commands fun') {
@@ -662,12 +662,10 @@ client.on('message', message => {
 //======= TESTING BELOW =======//
 //
 
-//top prio : fix github = fixed
-//work on personality   prio = low
-//Fix embeds for regular messages = delayed till later, not neccesary yet
-//fix scaling = fixed
-//check code for simple fixes = fixed (error quotes on images " paired with ')
-//gif without pings = fixed
+
+//add nsfw commands
+//add feedback to command list
+//add grope to gif / nsfw list
 
 
 
@@ -686,14 +684,22 @@ client.on('message', message => {
 	}
 	let formattedCommand = messageCommand.toLocaleLowerCase();
 	if (formattedCommand === 's!feedback') {
-		var feedbackowner = message.member.user.tag
+		message.channel.send("The feedback has been send, thank you!")
+		console.log(message.content)
+		var feedbackOwnerTag = message.member.user.tag
 		var messageFeedbackContent = message.content
+		var feedbackOwner = message.member.user.id
+		var serverSender = message.channel.guild
+		var channelServerSender = message.channel
 		const messageFeedback = new Discord.RichEmbed()
 			.setColor('#47f598')
 			.setTitle('Feedback time!')
-			.addField(feedbackowner, messageFeedbackContent)
+			.addField(feedbackOwnerTag, messageFeedbackContent)
+			.addField("Feedback ID owner:", feedbackOwner)
+			.addField("Server being send from:", serverSender)
+			.addField("Channel being send from:", channelServerSender)
 			.setTimestamp()
-			.setFooter("Seradys Beta V1.3.3.3", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
+			.setFooter("Seradys Beta V1.3.5", 'https://cdn.discordapp.com/attachments/648628577935294470/666638160608100352/firegreenedit1.png')
 		client.channels.get("669511184608919592").send(messageFeedback)
 	}
 
